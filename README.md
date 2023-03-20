@@ -1,7 +1,22 @@
 # Orbitmagic
 
 The "orbitmagic" library helps magicians model mathematical orbits. It is designed for magicians who know Python and lists.
-[Warning] Only defined mixes have an orbit!
+
+[Warning] Only defined shuffles have an orbit!
+
+## *Version 1.1 release*
+
+(only Windows version -- Mac version coming soon!)
+
+
+*What's new?*
+=============
+
+We've changed the function names to more formal ones:
+
+`mix -> shuffle`
+
+`pack -> deck`
 
 ## Installation
 
@@ -14,125 +29,125 @@ To install the library, you can use pip:
 
 Here is the list of functions exposed by the library:
 
-```is_pack(pack: list[int]) -> bool```
+```is_deck(deck: list[int]) -> bool```
 
 Verifies whether a list of integers represents a valid deck of cards.
 
 Arguments:
 
-- `pack`: a list of integers representing a deck of cards.
+- `deck`: a list of integers representing a deck of cards.
 
 Returns:
 
 - `True` if the deck is valid, `False` otherwise.
 
-```is_init(pack: list[int]) -> bool```
+```is_init(deck: list[int]) -> bool```
 
 
 Verifies whether a list of integers represents the initial deck.
 
 Arguments:
 
-- `pack`: a list of integers representing a deck of cards.
+- `deck`: a list of integers representing a deck of cards.
 
 Returns:
 
 - `True` if the deck is the initial deck, `False` otherwise.
 
-```orbit(mix:list[int]) -> int```
+```orbit(shuffle:list[int]) -> int```
 
 
-Calculates the number of orbits of a mix from a deck of cards.
+Calculates the number of orbits of a shuffle from a deck of cards.
 
 Arguments:
 
-- `mix`: a list that represents a way of shuffling the cards.
+- `shuffle`: a list that represents a way of shuffling the cards.
 
 Returns:
 
-- an integer representing the number of orbits of the mix.
+- an integer representing the number of orbits of the shuffle.
 
-```mix(pack: list[int], mix_method: list[int]) -> list[int]```
+```shuffle(deck: list[int], shuffle_method: list[int]) -> list[int]```
 
 
 Shuffles a deck of cards according to a given shuffling method.
 
 Arguments:
 
-- `pack`: a list of integers representing a deck of cards.
-- `mix_method`: a list representing a way of shuffling the cards.
+- `deck`: a list of integers representing a deck of cards.
+- `shuffle_method`: a list representing a way of shuffling the cards.
 
 Returns:
 
 - a list of integers representing the shuffled deck of cards.
 
-```reverse(mix_method: list[int]) -> list[int]```
+```reverse(shuffle_method: list[int]) -> list[int]```
 
 
-Reverses the mixing of a deck of cards according to a given mixing method.
+Reverses the shuffling of a deck of cards according to a given shuffling method.
 
 Arguments:
 
-- `mix_method`: a list that represents a way to mix the cards.
+- `shuffle_method`: a list that represents a way to shuffle the cards.
 
 Returns:
 
-- a list of integers representing a mixing that is the reverse of the given mixing.
+- a list of integers representing a shuffling that is the reverse of the given shuffling.
 
-```cycle(mix_method: list[int], k: int) -> list[int]```
+```cycle(shuffle_method: list[int], k: int) -> list[int]```
 
 
-Calculates the condition of the starting deck of cards mixed k times by the given mixing.
-(Also equivalent to mixing k times by the given mixing.)
+Calculates the condition of the starting deck of cards shuffled k times by the given shuffling.
+(Also equivalent to shuffling k times by the given shuffling.)
 
 Arguments:
 
-- `mix_method`: a list that represents a way to mix the cards.
+- `shuffle_method`: a list that represents a way to shuffle the cards.
 - `k`: number of iterations (can be negative).
 
 Returns:
 
-- a list of integers representing the equivalent mixing.
+- a list of integers representing the equivalent shuffling.
 
-```rev_cycle(mix_method: list[int], k: int) -> list[int]```
+```rev_cycle(shuffle_method: list[int], k: int) -> list[int]```
 
 
-Similar to the cycle function, but instead of using `mix_method`, it cycles using `reverse(mix_method)`.
+Similar to the cycle function, but instead of using `shuffle_method`, it cycles using `reverse(shuffle_method)`.
 
 Arguments:
 
-- `mix_method`: a list that represents a way to mix the cards.
+- `shuffle_method`: a list that represents a way to shuffle the cards.
 - `k`: number of iterations (can be negative).
 
 Returns:
 
-- a list of integers representing the equivalent mixing.
+- a list of integers representing the equivalent shuffling.
 
-```all_cases(mix_method: list[int]) -> list[list[int]]```
+```all_cases(shuffle_method: list[int]) -> list[list[int]]```
 
 
-Calculates all iterations of the given mixing until the deck returns to the starting deck.
+Calculates all iterations of the given shuffling until the deck returns to the starting deck.
 
 Arguments:
 
-- `mix_method`: a list that represents a way to mix the cards.
+- `shuffle_method`: a list that represents a way to shuffle the cards.
 
 Returns:
 
-- a list of lists, with each element (a list of integers) representing an iteration of the given mixing.
+- a list of lists, with each element (a list of integers) representing an iteration of the given shuffling.
 
-```find_mix(pack0: list[int], pack1: list[int]) -> list[int]```
+```find_shuffle(deck0: list[int], deck1: list[int]) -> list[int]```
 
-Computes a mix according to the conditions of the deck before and after the mix.
+Computes a shuffle according to the conditions of the deck before and after the shuffle.
 
 Arguments:
-- `pack0:`a list of integers representing a deck of cards before a mix.
-- `pack1:`a list of integers representing the deck of cards after the mix.
+- `deck0:`a list of integers representing a deck of cards before a shuffle.
+- `deck1:`a list of integers representing the deck of cards after the shuffle.
 
 Returns:
-- a list of integers representing the mix.
+- a list of integers representing the shuffle.
 
-```pack_init(n: int) -> list[int]```
+```deck_init(n: int) -> list[int]```
 
 Creates the initial deck of n cards.
 
@@ -154,6 +169,37 @@ This library was created by
 ## License
 
 This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE.txt) file for more details.
+
+## Future Version (Preview)
+
+We are going to add some shuffling methods as fonctions such as Faro and Monge.
+
+Now, for using these shuffles, we offer you the python code bellow :
+
+```
+def faro_in(n: int):
+    if n % 2:
+        return None
+    return list(i // 2 + (1 - i % 2) * n // 2 for i in range(2, n + 2))
+
+
+def faro_out(n: int):
+    if n % 2:
+        return None
+    return list(i // 2 + (i % 2) * n // 2 for i in range(2, n + 2))
+
+
+def monge_in(n: int):
+    if n % 2:
+        return list(range(n, -1, -2)) + list(range(2, n + 1, 2))
+    return list(range(n - 1, 0, -2)) + list(range(2, n + 1, 2))
+
+
+def monge_out(n: int):
+    if n % 2:
+        return list(range(n - 1, 0, -2)) + list(range(1, n + 1, 2))
+    return list(range(n, 0, -2)) + list(range(1, n + 1, 2))
+```
 
 ### Contact Us
 If you have any questions or feedback, feel free to [contact us](https://github.com/JeongHan-Bae).
